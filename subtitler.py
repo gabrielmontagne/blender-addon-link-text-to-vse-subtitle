@@ -3,6 +3,21 @@ from bpy.app.handlers import persistent
 
 bl_info = { "name": "subtitle text render", "category": "Object" }
 
+class SubtitleLinkerPanel(bpy.types.Panel):
+    """Creates a Panel in the object properties window"""
+
+    bl_label = "Subtitle Link"
+    bl_idname = "OBJECT_PT_subtitle_link"
+    bl_space_type = 'PROPERTIES'
+    bl_region_type = 'WINDOW'
+    bl_context = "object"
+
+    def draw(self, context):
+        layout = self.layout
+        obj = context.object
+        row = layout.row
+        row.label(text="aru wor", icon='WORLD_DATA')
+
 @persistent
 def frame_pre(scene):
     print("Frame Change", scene.frame_current)
@@ -10,12 +25,17 @@ def frame_pre(scene):
 def register():
     print('registering')
 
+    # TMP
     bpy.app.handlers.frame_change_pre.clear()
-    bpy.app.handlers.frame_change_pre.append(frame_pre)
 
+    bpy.app.handlers.frame_change_pre.append(frame_pre)
+    bpy.utils.register_class(SubtitleLinkerPanel)
 
 def unregister():
     print('unregistering')
+
+    bpy.utils.unregister_class(SubtitleLinkerPanel)
+    bpy.app.handlers.frame_change_pre.remove(frame_pre)
 
 
 if __name__ == "__main__":
