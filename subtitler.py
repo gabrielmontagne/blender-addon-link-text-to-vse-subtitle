@@ -15,7 +15,7 @@ class SubtitleLinkerPanel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         obj = context.object
-        row = layout.row
+        row = layout.row()
         row.label(text="aru wor", icon='WORLD_DATA')
 
 @persistent
