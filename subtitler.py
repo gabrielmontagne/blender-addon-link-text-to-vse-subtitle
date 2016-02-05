@@ -1,5 +1,6 @@
 import bpy
 from bpy.app.handlers import persistent
+from bpy.types import TextCurve
 
 bl_info = { "name": "subtitle text render", "category": "Object" }
 
@@ -10,7 +11,12 @@ class SubtitleLinkerPanel(bpy.types.Panel):
     bl_idname = "OBJECT_PT_subtitle_link"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
-    bl_context = "object"
+    bl_context = "data"
+
+    @classmethod
+    def poll(cls, context):
+        # return True
+        return (type(context.curve) is TextCurve)
 
     def draw(self, context):
         layout = self.layout
