@@ -15,14 +15,26 @@ class SubtitleLinkerPanel(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
-        # return True
+        if not context.curve:
+            return False
+
         return (type(context.curve) is TextCurve)
 
     def draw(self, context):
         layout = self.layout
         obj = context.object
+        curve = context.curve
+
+        print(context.curve)
+
         row = layout.row()
         row.label(text="aru wor", icon='WORLD_DATA')
+
+        row = layout.row()
+        row.prop(curve, 'link_to_vse_text')
+
+        row = layout.row()
+        row.label(text="loro wor", icon='WORLD_DATA')
 
         row = layout.row()
         row.prop(obj, 'name')
@@ -35,6 +47,10 @@ def frame_pre(scene):
 
 def register():
     print('registering')
+
+    TextCurve.link_to_vse_text = bpy.props.BoolProperty(
+        name="link_to_vse_text",
+        default=False)
 
     # TMP
     bpy.app.handlers.frame_change_pre.clear()
