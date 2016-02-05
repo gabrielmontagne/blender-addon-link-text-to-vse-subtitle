@@ -18,6 +18,11 @@ class SubtitleLinkerPanel(bpy.types.Panel):
         row = layout.row()
         row.label(text="aru wor", icon='WORLD_DATA')
 
+        row = layout.row()
+        row.prop(obj, 'name')
+
+
+
 @persistent
 def frame_pre(scene):
     print("Frame Change", scene.frame_current)
