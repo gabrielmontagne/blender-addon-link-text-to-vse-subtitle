@@ -32,7 +32,9 @@ class SubtitleLinkerPanel(bpy.types.Panel):
 
 @persistent
 def frame_pre(scene):
-    print("Frame Change", scene.frame_current)
+    current = scene.frame_current_final
+    print([ s.text for s in scene.sequence_editor.sequences if s.type == 'TEXT'
+        and s.frame_final_start <= current and s.frame_final_end >= current ])
 
 def register():
     print('registering')
