@@ -32,9 +32,22 @@ class SubtitleLinkerPanel(bpy.types.Panel):
 
 @persistent
 def frame_pre(scene):
+
     current = scene.frame_current_final
-    print([ s.text for s in scene.sequence_editor.sequences if s.type == 'TEXT'
-        and s.frame_final_start <= current and s.frame_final_end >= current ])
+    sequences = [ s for s in scene.sequence_editor.sequences if s.type == 'TEXT' and s.frame_final_start <= current and s.frame_final_end >= current ]
+
+    for text in scene.objects:
+        if text.type == 'FONT' and text.data.link_to_vse_text:
+            text.data.body = ''
+
+            for s in sequences:
+                channel = s.channel
+                link_channel = text.data.link_vse_text_channel
+
+                if link_channel > 0 and channel != link_channel:
+                    continue
+
+                text.data.body = s.text
 
 def register():
     print('registering')
