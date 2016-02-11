@@ -34,7 +34,8 @@ class SubtitleLinkerPanel(bpy.types.Panel):
 def frame_pre(scene):
 
     current = scene.frame_current_final
-    sequences = [ s for s in scene.sequence_editor.sequences if s.type == 'TEXT' and s.frame_final_start <= current and s.frame_final_end >= current ]
+    sequences = [ s for s in scene.sequence_editor.sequences if s.type == 'TEXT'
+        and s.frame_final_start <= current and s.frame_final_end >= current ]
 
     for text in scene.objects:
         if text.type == 'FONT' and text.data.link_to_vse_text:
@@ -50,8 +51,6 @@ def frame_pre(scene):
                 text.data.body = s.text
 
 def register():
-    print('registering')
-
     TextCurve.link_to_vse_text = bpy.props.BoolProperty(
         name="Link to VSE",
         default=False)
@@ -59,18 +58,12 @@ def register():
     TextCurve.link_vse_text_channel = bpy.props.IntProperty(
         name='Constrain to VSE channel', default=0, min=0)
 
-    # TMP
-    bpy.app.handlers.frame_change_pre.clear()
-
     bpy.app.handlers.frame_change_pre.append(frame_pre)
     bpy.utils.register_class(SubtitleLinkerPanel)
 
 def unregister():
-    print('unregistering')
-
     bpy.utils.unregister_class(SubtitleLinkerPanel)
     bpy.app.handlers.frame_change_pre.remove(frame_pre)
-
 
 if __name__ == "__main__":
     register()
