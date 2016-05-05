@@ -33,6 +33,9 @@ class SubtitleLinkerPanel(bpy.types.Panel):
 @persistent
 def frame_pre(scene):
 
+    if not scene.sequence_editor:
+        return 
+
     current = scene.frame_current_final
     sequences = [ s for s in scene.sequence_editor.sequences if s.type == 'TEXT'
         and s.frame_final_start <= current and s.frame_final_end >= current ]
