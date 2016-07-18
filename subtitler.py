@@ -2,10 +2,10 @@ import bpy
 from bpy.app.handlers import persistent
 from bpy.types import TextCurve
 
-bl_info = { "name": "subtitle text render", "category": "Object" }
+bl_info = { "name": "Subtitle Text Render", "category": "Object" }
 
 class SubtitleLinkerPanel(bpy.types.Panel):
-    """Creates a Panel in the object properties window"""
+    """Panel in the object properties window to link a text object to a subtitle effect in the VSE"""
 
     bl_label = "Subtitle Link"
     bl_idname = "OBJECT_PT_subtitle_link"
