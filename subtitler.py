@@ -2,7 +2,15 @@ import bpy
 from bpy.app.handlers import persistent
 from bpy.types import TextCurve
 
-bl_info = { "name": "Subtitle Text Render", "category": "Object" }
+bl_info = {
+    'name': 'Link Text object to VSE Subtitles',
+    'author': 'gabriel montagné, gabriel@tibas.london',
+    'version': (0, 1, 1),
+    'blender': (2, 77, 0),
+    'description': 'Create an panel for Text Objects that links the to VSE subtitle text',
+    'tracker_url': 'https://bitbucket.org/gabriel.montagne/blender-addon-link-text-to-vse-subtitle/issues?status=new&status=open',
+    'category': 'Object'
+}
 
 class SubtitleLinkerPanel(bpy.types.Panel):
     """Panel in the object properties window to link a text object to a subtitle effect in the VSE"""
