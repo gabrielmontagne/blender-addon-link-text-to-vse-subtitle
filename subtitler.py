@@ -6,13 +6,13 @@ bl_info = {
     'name': 'Link Text object to VSE Subtitles',
     'author': 'gabriel montagné, gabriel@tibas.london',
     'version': (0, 1, 1),
-    'blender': (2, 77, 0),
+    'blender': (2, 80, 0),
     'description': 'Create an panel for Text Objects that links the to VSE subtitle text',
     'tracker_url': 'https://bitbucket.org/gabriel.montagne/blender-addon-link-text-to-vse-subtitle/issues?status=new&status=open',
     'category': 'Object'
 }
 
-class SubtitleLinkerPanel(bpy.types.Panel):
+class SUBTITLER_VSE_PT_panel(bpy.types.Panel):
     """Panel in the object properties window to link a text object to a subtitle effect in the VSE"""
 
     bl_label = "Subtitle Link"
@@ -70,10 +70,10 @@ def register():
         name='Constrain to VSE channel', default=0, min=0)
 
     bpy.app.handlers.frame_change_pre.append(frame_pre)
-    bpy.utils.register_class(SubtitleLinkerPanel)
+    bpy.utils.register_class(SUBTITLER_VSE_PT_panel)
 
 def unregister():
-    bpy.utils.unregister_class(SubtitleLinkerPanel)
+    bpy.utils.unregister_class(SUBTITLER_VSE_PT_panel)
     bpy.app.handlers.frame_change_pre.remove(frame_pre)
 
 if __name__ == "__main__":
